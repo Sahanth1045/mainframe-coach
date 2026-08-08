@@ -10,33 +10,141 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppRouteImport } from './routes/_app'
+import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppHistoryRouteImport } from './routes/_app.history'
+import { Route as AppInterviewRouteImport } from './routes/_app.interview'
+import { Route as AppLearnRouteImport } from './routes/_app.learn'
+import { Route as AppPracticeRouteImport } from './routes/_app.practice'
+import { Route as AppProgressRouteImport } from './routes/_app.progress'
+import { Route as AppSettingsRouteImport } from './routes/_app.settings'
+import { Route as AppInterviewFeedbackRouteImport } from './routes/_app.interview.feedback'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppDashboardRoute = AppDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppHistoryRoute = AppHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInterviewRoute = AppInterviewRouteImport.update({
+  id: '/interview',
+  path: '/interview',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLearnRoute = AppLearnRouteImport.update({
+  id: '/learn',
+  path: '/learn',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPracticeRoute = AppPracticeRouteImport.update({
+  id: '/practice',
+  path: '/practice',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProgressRoute = AppProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInterviewFeedbackRoute = AppInterviewFeedbackRouteImport.update({
+  id: '/feedback',
+  path: '/feedback',
+  getParentRoute: () => AppInterviewRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/history': typeof AppHistoryRoute
+  '/interview': typeof AppInterviewRouteWithChildren
+  '/learn': typeof AppLearnRoute
+  '/practice': typeof AppPracticeRoute
+  '/progress': typeof AppProgressRoute
+  '/settings': typeof AppSettingsRoute
+  '/interview/feedback': typeof AppInterviewFeedbackRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/history': typeof AppHistoryRoute
+  '/interview': typeof AppInterviewRouteWithChildren
+  '/learn': typeof AppLearnRoute
+  '/practice': typeof AppPracticeRoute
+  '/progress': typeof AppProgressRoute
+  '/settings': typeof AppSettingsRoute
+  '/interview/feedback': typeof AppInterviewFeedbackRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_app': typeof AppRouteWithChildren
+  '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/history': typeof AppHistoryRoute
+  '/_app/interview': typeof AppInterviewRouteWithChildren
+  '/_app/learn': typeof AppLearnRoute
+  '/_app/practice': typeof AppPracticeRoute
+  '/_app/progress': typeof AppProgressRoute
+  '/_app/settings': typeof AppSettingsRoute
+  '/_app/interview/feedback': typeof AppInterviewFeedbackRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/history'
+    | '/interview'
+    | '/learn'
+    | '/practice'
+    | '/progress'
+    | '/settings'
+    | '/interview/feedback'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/history'
+    | '/interview'
+    | '/learn'
+    | '/practice'
+    | '/progress'
+    | '/settings'
+    | '/interview/feedback'
+  id:
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/_app/dashboard'
+    | '/_app/history'
+    | '/_app/interview'
+    | '/_app/learn'
+    | '/_app/practice'
+    | '/_app/progress'
+    | '/_app/settings'
+    | '/_app/interview/feedback'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +156,110 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/dashboard': {
+      id: '/_app/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AppDashboardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/history': {
+      id: '/_app/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof AppHistoryRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/interview': {
+      id: '/_app/interview'
+      path: '/interview'
+      fullPath: '/interview'
+      preLoaderRoute: typeof AppInterviewRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/learn': {
+      id: '/_app/learn'
+      path: '/learn'
+      fullPath: '/learn'
+      preLoaderRoute: typeof AppLearnRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/practice': {
+      id: '/_app/practice'
+      path: '/practice'
+      fullPath: '/practice'
+      preLoaderRoute: typeof AppPracticeRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/progress': {
+      id: '/_app/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof AppProgressRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/settings': {
+      id: '/_app/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/interview/feedback': {
+      id: '/_app/interview/feedback'
+      path: '/feedback'
+      fullPath: '/interview/feedback'
+      preLoaderRoute: typeof AppInterviewFeedbackRouteImport
+      parentRoute: typeof AppInterviewRoute
+    }
   }
 }
 
+interface AppInterviewRouteChildren {
+  AppInterviewFeedbackRoute: typeof AppInterviewFeedbackRoute
+}
+
+const AppInterviewRouteChildren: AppInterviewRouteChildren = {
+  AppInterviewFeedbackRoute: AppInterviewFeedbackRoute,
+}
+
+const AppInterviewRouteWithChildren = AppInterviewRoute._addFileChildren(
+  AppInterviewRouteChildren,
+)
+
+interface AppRouteChildren {
+  AppDashboardRoute: typeof AppDashboardRoute
+  AppHistoryRoute: typeof AppHistoryRoute
+  AppInterviewRoute: typeof AppInterviewRouteWithChildren
+  AppLearnRoute: typeof AppLearnRoute
+  AppPracticeRoute: typeof AppPracticeRoute
+  AppProgressRoute: typeof AppProgressRoute
+  AppSettingsRoute: typeof AppSettingsRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppDashboardRoute: AppDashboardRoute,
+  AppHistoryRoute: AppHistoryRoute,
+  AppInterviewRoute: AppInterviewRouteWithChildren,
+  AppLearnRoute: AppLearnRoute,
+  AppPracticeRoute: AppPracticeRoute,
+  AppProgressRoute: AppProgressRoute,
+  AppSettingsRoute: AppSettingsRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
