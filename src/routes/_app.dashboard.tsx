@@ -26,8 +26,8 @@ const hour = new Date().getHours();
 const greeting = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
 
 function DashboardPage() {
-  const continuePath = learningPaths[0];
-  const lastInterview = interviewHistory[0];
+  const continuePath = learningPaths[0] ?? learningPaths.at(0)!;
+  const lastInterview = interviewHistory[0] ?? interviewHistory.at(0)!;
   const topTopics = topics.slice(0, 5);
 
   return (
