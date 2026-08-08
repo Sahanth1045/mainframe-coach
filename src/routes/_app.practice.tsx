@@ -68,7 +68,7 @@ function PracticePage() {
           <SectionLabel>All Topics</SectionLabel>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {topics.map((t) => {
-              const Icon = strengthIcon[t.strength];
+              const Icon = strengthIcon[t.strength] ?? AlertCircle;
               const tone = toneFor(t.mastery);
               return (
                 <Card key={t.id} className="card-hover p-5">
