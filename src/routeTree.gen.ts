@@ -17,6 +17,7 @@ import { Route as AppInterviewRouteImport } from './routes/_app.interview'
 import { Route as AppLearnRouteImport } from './routes/_app.learn'
 import { Route as AppPracticeRouteImport } from './routes/_app.practice'
 import { Route as AppProgressRouteImport } from './routes/_app.progress'
+import { Route as AppSettingsRouteImport } from './routes/_app.settings'
 import { Route as AppInterviewFeedbackRouteImport } from './routes/_app.interview.feedback'
 
 const IndexRoute = IndexRouteImport.update({
@@ -58,6 +59,11 @@ const AppProgressRoute = AppProgressRouteImport.update({
   path: '/progress',
   getParentRoute: () => AppRoute,
 } as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppInterviewFeedbackRoute = AppInterviewFeedbackRouteImport.update({
   id: '/feedback',
   path: '/feedback',
@@ -72,6 +78,7 @@ export interface FileRoutesByFullPath {
   '/learn': typeof AppLearnRoute
   '/practice': typeof AppPracticeRoute
   '/progress': typeof AppProgressRoute
+  '/settings': typeof AppSettingsRoute
   '/interview/feedback': typeof AppInterviewFeedbackRoute
 }
 export interface FileRoutesByTo {
@@ -82,6 +89,7 @@ export interface FileRoutesByTo {
   '/learn': typeof AppLearnRoute
   '/practice': typeof AppPracticeRoute
   '/progress': typeof AppProgressRoute
+  '/settings': typeof AppSettingsRoute
   '/interview/feedback': typeof AppInterviewFeedbackRoute
 }
 export interface FileRoutesById {
@@ -94,6 +102,7 @@ export interface FileRoutesById {
   '/_app/learn': typeof AppLearnRoute
   '/_app/practice': typeof AppPracticeRoute
   '/_app/progress': typeof AppProgressRoute
+  '/_app/settings': typeof AppSettingsRoute
   '/_app/interview/feedback': typeof AppInterviewFeedbackRoute
 }
 export interface FileRouteTypes {
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/learn'
     | '/practice'
     | '/progress'
+    | '/settings'
     | '/interview/feedback'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -116,6 +126,7 @@ export interface FileRouteTypes {
     | '/learn'
     | '/practice'
     | '/progress'
+    | '/settings'
     | '/interview/feedback'
   id:
     | '__root__'
@@ -127,6 +138,7 @@ export interface FileRouteTypes {
     | '/_app/learn'
     | '/_app/practice'
     | '/_app/progress'
+    | '/_app/settings'
     | '/_app/interview/feedback'
   fileRoutesById: FileRoutesById
 }
@@ -193,6 +205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppProgressRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/settings': {
+      id: '/_app/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/interview/feedback': {
       id: '/_app/interview/feedback'
       path: '/feedback'
@@ -222,6 +241,7 @@ interface AppRouteChildren {
   AppLearnRoute: typeof AppLearnRoute
   AppPracticeRoute: typeof AppPracticeRoute
   AppProgressRoute: typeof AppProgressRoute
+  AppSettingsRoute: typeof AppSettingsRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
@@ -231,6 +251,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppLearnRoute: AppLearnRoute,
   AppPracticeRoute: AppPracticeRoute,
   AppProgressRoute: AppProgressRoute,
+  AppSettingsRoute: AppSettingsRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
