@@ -77,16 +77,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Mainframe Interview Coach — AI interview prep for mainframe developers" },
+      { name: "description", content: "Practice realistic mainframe interviews with an AI interviewer that evaluates your technical knowledge, reasoning and communication." },
+      { name: "author", content: "Mainframe Interview Coach" },
+      { property: "og:title", content: "Mainframe Interview Coach" },
+      { property: "og:description", content: "Become interview-ready for your next mainframe job. AI-powered mock interviews, personalized feedback and topic-level analysis." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap",
+      },
       {
         rel: "stylesheet",
         href: appCss,
