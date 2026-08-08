@@ -11,7 +11,7 @@ export const Route = createFileRoute("/_app/settings")({
     ],
   }),
   component: SettingsPage,
-);
+});
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
