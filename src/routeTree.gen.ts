@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
 import { Route as AppInterviewRouteImport } from './routes/_app.interview'
+import { Route as AppInterviewFeedbackRouteImport } from './routes/_app.interview.feedback'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -33,30 +34,44 @@ const AppInterviewRoute = AppInterviewRouteImport.update({
   path: '/interview',
   getParentRoute: () => AppRoute,
 } as any)
+const AppInterviewFeedbackRoute = AppInterviewFeedbackRouteImport.update({
+  id: '/feedback',
+  path: '/feedback',
+  getParentRoute: () => AppInterviewRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof AppDashboardRoute
-  '/interview': typeof AppInterviewRoute
+  '/interview': typeof AppInterviewRouteWithChildren
+  '/interview/feedback': typeof AppInterviewFeedbackRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof AppDashboardRoute
-  '/interview': typeof AppInterviewRoute
+  '/interview': typeof AppInterviewRouteWithChildren
+  '/interview/feedback': typeof AppInterviewFeedbackRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/_app/dashboard': typeof AppDashboardRoute
-  '/_app/interview': typeof AppInterviewRoute
+  '/_app/interview': typeof AppInterviewRouteWithChildren
+  '/_app/interview/feedback': typeof AppInterviewFeedbackRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/interview'
+  fullPaths: '/' | '/dashboard' | '/interview' | '/interview/feedback'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/interview'
-  id: '__root__' | '/' | '/_app' | '/_app/dashboard' | '/_app/interview'
+  to: '/' | '/dashboard' | '/interview' | '/interview/feedback'
+  id:
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/_app/dashboard'
+    | '/_app/interview'
+    | '/_app/interview/feedback'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -94,17 +109,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppInterviewRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/interview/feedback': {
+      id: '/_app/interview/feedback'
+      path: '/feedback'
+      fullPath: '/interview/feedback'
+      preLoaderRoute: typeof AppInterviewFeedbackRouteImport
+      parentRoute: typeof AppInterviewRoute
+    }
   }
 }
 
+interface AppInterviewRouteChildren {
+  AppInterviewFeedbackRoute: typeof AppInterviewFeedbackRoute
+}
+
+const AppInterviewRouteChildren: AppInterviewRouteChildren = {
+  AppInterviewFeedbackRoute: AppInterviewFeedbackRoute,
+}
+
+const AppInterviewRouteWithChildren = AppInterviewRoute._addFileChildren(
+  AppInterviewRouteChildren,
+)
+
 interface AppRouteChildren {
   AppDashboardRoute: typeof AppDashboardRoute
-  AppInterviewRoute: typeof AppInterviewRoute
+  AppInterviewRoute: typeof AppInterviewRouteWithChildren
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppDashboardRoute: AppDashboardRoute,
-  AppInterviewRoute: AppInterviewRoute,
+  AppInterviewRoute: AppInterviewRouteWithChildren,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
