@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
-  Clock,
   ChevronRight,
   Sparkles,
   Check,
@@ -63,7 +62,7 @@ export const Route = createFileRoute("/_app/interview")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: InterviewPage;
+  component: InterviewPage,
 });
 
 type Phase = "setup" | "live" | "report";
@@ -495,9 +494,14 @@ function InterviewPage() {
 }
 
 function InlineFeedback({ evaluation }: { evaluation: AnswerEvaluation }) {
-  const tone = evaluation.verdict === "strong" ? "success" : evaluation.verdict === "partial" ? "warning" : "destructive";
+  const tone =
+    evaluation.verdict === "strong"
+      ? "border-success/20 bg-success/5"
+      : evaluation.verdict === "partial"
+        ? "border-warning/20 bg-warning/5"
+        : "border-destructive/20 bg-destructive/5";
   return (
-    <div className={`mt-3 rounded-xl border border-${tone}/20 bg-${tone}/5 p-4`}>
+    <div className={`mt-3 rounded-xl border p-4 ${tone}`}>
       <div className="flex items-center justify-between gap-3">
         <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Instant feedback</p>
         <span className="text-sm font-bold tabular-nums text-foreground">{evaluation.score}/10</span>
