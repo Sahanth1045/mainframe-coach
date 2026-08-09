@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppExpertRouteImport } from './routes/_app.expert'
 import { Route as AppHistoryRouteImport } from './routes/_app.history'
 import { Route as AppInterviewRouteImport } from './routes/_app.interview'
 import { Route as AppLearnRouteImport } from './routes/_app.learn'
@@ -34,6 +35,11 @@ const AppRoute = AppRouteImport.update({
 const AppDashboardRoute = AppDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppExpertRoute = AppExpertRouteImport.update({
+  id: '/expert',
+  path: '/expert',
   getParentRoute: () => AppRoute,
 } as any)
 const AppHistoryRoute = AppHistoryRouteImport.update({
@@ -85,6 +91,7 @@ const AppInterviewFeedbackRoute = AppInterviewFeedbackRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof AppDashboardRoute
+  '/expert': typeof AppExpertRoute
   '/history': typeof AppHistoryRoute
   '/interview': typeof AppInterviewRouteWithChildren
   '/learn': typeof AppLearnRoute
@@ -98,6 +105,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof AppDashboardRoute
+  '/expert': typeof AppExpertRoute
   '/history': typeof AppHistoryRoute
   '/interview': typeof AppInterviewRouteWithChildren
   '/learn': typeof AppLearnRoute
@@ -113,6 +121,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/expert': typeof AppExpertRoute
   '/_app/history': typeof AppHistoryRoute
   '/_app/interview': typeof AppInterviewRouteWithChildren
   '/_app/learn': typeof AppLearnRoute
@@ -128,6 +137,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/dashboard'
+    | '/expert'
     | '/history'
     | '/interview'
     | '/learn'
@@ -141,6 +151,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/dashboard'
+    | '/expert'
     | '/history'
     | '/interview'
     | '/learn'
@@ -155,6 +166,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_app'
     | '/_app/dashboard'
+    | '/_app/expert'
     | '/_app/history'
     | '/_app/interview'
     | '/_app/learn'
@@ -192,6 +204,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AppDashboardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/expert': {
+      id: '/_app/expert'
+      path: '/expert'
+      fullPath: '/expert'
+      preLoaderRoute: typeof AppExpertRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/history': {
@@ -274,6 +293,7 @@ const AppInterviewRouteWithChildren = AppInterviewRoute._addFileChildren(
 
 interface AppRouteChildren {
   AppDashboardRoute: typeof AppDashboardRoute
+  AppExpertRoute: typeof AppExpertRoute
   AppHistoryRoute: typeof AppHistoryRoute
   AppInterviewRoute: typeof AppInterviewRouteWithChildren
   AppLearnRoute: typeof AppLearnRoute
@@ -286,6 +306,7 @@ interface AppRouteChildren {
 
 const AppRouteChildren: AppRouteChildren = {
   AppDashboardRoute: AppDashboardRoute,
+  AppExpertRoute: AppExpertRoute,
   AppHistoryRoute: AppHistoryRoute,
   AppInterviewRoute: AppInterviewRouteWithChildren,
   AppLearnRoute: AppLearnRoute,
