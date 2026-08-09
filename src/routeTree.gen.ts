@@ -12,11 +12,14 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppExpertRouteImport } from './routes/_app.expert'
 import { Route as AppHistoryRouteImport } from './routes/_app.history'
 import { Route as AppInterviewRouteImport } from './routes/_app.interview'
 import { Route as AppLearnRouteImport } from './routes/_app.learn'
 import { Route as AppPracticeRouteImport } from './routes/_app.practice'
 import { Route as AppProgressRouteImport } from './routes/_app.progress'
+import { Route as AppRoadmapRouteImport } from './routes/_app.roadmap'
+import { Route as AppScenariosRouteImport } from './routes/_app.scenarios'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
 import { Route as AppInterviewFeedbackRouteImport } from './routes/_app.interview.feedback'
 
@@ -32,6 +35,11 @@ const AppRoute = AppRouteImport.update({
 const AppDashboardRoute = AppDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppExpertRoute = AppExpertRouteImport.update({
+  id: '/expert',
+  path: '/expert',
   getParentRoute: () => AppRoute,
 } as any)
 const AppHistoryRoute = AppHistoryRouteImport.update({
@@ -59,6 +67,16 @@ const AppProgressRoute = AppProgressRouteImport.update({
   path: '/progress',
   getParentRoute: () => AppRoute,
 } as any)
+const AppRoadmapRoute = AppRoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppScenariosRoute = AppScenariosRouteImport.update({
+  id: '/scenarios',
+  path: '/scenarios',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppSettingsRoute = AppSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -73,22 +91,28 @@ const AppInterviewFeedbackRoute = AppInterviewFeedbackRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof AppDashboardRoute
+  '/expert': typeof AppExpertRoute
   '/history': typeof AppHistoryRoute
   '/interview': typeof AppInterviewRouteWithChildren
   '/learn': typeof AppLearnRoute
   '/practice': typeof AppPracticeRoute
   '/progress': typeof AppProgressRoute
+  '/roadmap': typeof AppRoadmapRoute
+  '/scenarios': typeof AppScenariosRoute
   '/settings': typeof AppSettingsRoute
   '/interview/feedback': typeof AppInterviewFeedbackRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof AppDashboardRoute
+  '/expert': typeof AppExpertRoute
   '/history': typeof AppHistoryRoute
   '/interview': typeof AppInterviewRouteWithChildren
   '/learn': typeof AppLearnRoute
   '/practice': typeof AppPracticeRoute
   '/progress': typeof AppProgressRoute
+  '/roadmap': typeof AppRoadmapRoute
+  '/scenarios': typeof AppScenariosRoute
   '/settings': typeof AppSettingsRoute
   '/interview/feedback': typeof AppInterviewFeedbackRoute
 }
@@ -97,11 +121,14 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/expert': typeof AppExpertRoute
   '/_app/history': typeof AppHistoryRoute
   '/_app/interview': typeof AppInterviewRouteWithChildren
   '/_app/learn': typeof AppLearnRoute
   '/_app/practice': typeof AppPracticeRoute
   '/_app/progress': typeof AppProgressRoute
+  '/_app/roadmap': typeof AppRoadmapRoute
+  '/_app/scenarios': typeof AppScenariosRoute
   '/_app/settings': typeof AppSettingsRoute
   '/_app/interview/feedback': typeof AppInterviewFeedbackRoute
 }
@@ -110,22 +137,28 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/dashboard'
+    | '/expert'
     | '/history'
     | '/interview'
     | '/learn'
     | '/practice'
     | '/progress'
+    | '/roadmap'
+    | '/scenarios'
     | '/settings'
     | '/interview/feedback'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/dashboard'
+    | '/expert'
     | '/history'
     | '/interview'
     | '/learn'
     | '/practice'
     | '/progress'
+    | '/roadmap'
+    | '/scenarios'
     | '/settings'
     | '/interview/feedback'
   id:
@@ -133,11 +166,14 @@ export interface FileRouteTypes {
     | '/'
     | '/_app'
     | '/_app/dashboard'
+    | '/_app/expert'
     | '/_app/history'
     | '/_app/interview'
     | '/_app/learn'
     | '/_app/practice'
     | '/_app/progress'
+    | '/_app/roadmap'
+    | '/_app/scenarios'
     | '/_app/settings'
     | '/_app/interview/feedback'
   fileRoutesById: FileRoutesById
@@ -168,6 +204,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AppDashboardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/expert': {
+      id: '/_app/expert'
+      path: '/expert'
+      fullPath: '/expert'
+      preLoaderRoute: typeof AppExpertRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/history': {
@@ -205,6 +248,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppProgressRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/roadmap': {
+      id: '/_app/roadmap'
+      path: '/roadmap'
+      fullPath: '/roadmap'
+      preLoaderRoute: typeof AppRoadmapRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/scenarios': {
+      id: '/_app/scenarios'
+      path: '/scenarios'
+      fullPath: '/scenarios'
+      preLoaderRoute: typeof AppScenariosRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/settings': {
       id: '/_app/settings'
       path: '/settings'
@@ -236,21 +293,27 @@ const AppInterviewRouteWithChildren = AppInterviewRoute._addFileChildren(
 
 interface AppRouteChildren {
   AppDashboardRoute: typeof AppDashboardRoute
+  AppExpertRoute: typeof AppExpertRoute
   AppHistoryRoute: typeof AppHistoryRoute
   AppInterviewRoute: typeof AppInterviewRouteWithChildren
   AppLearnRoute: typeof AppLearnRoute
   AppPracticeRoute: typeof AppPracticeRoute
   AppProgressRoute: typeof AppProgressRoute
+  AppRoadmapRoute: typeof AppRoadmapRoute
+  AppScenariosRoute: typeof AppScenariosRoute
   AppSettingsRoute: typeof AppSettingsRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppDashboardRoute: AppDashboardRoute,
+  AppExpertRoute: AppExpertRoute,
   AppHistoryRoute: AppHistoryRoute,
   AppInterviewRoute: AppInterviewRouteWithChildren,
   AppLearnRoute: AppLearnRoute,
   AppPracticeRoute: AppPracticeRoute,
   AppProgressRoute: AppProgressRoute,
+  AppRoadmapRoute: AppRoadmapRoute,
+  AppScenariosRoute: AppScenariosRoute,
   AppSettingsRoute: AppSettingsRoute,
 }
 
