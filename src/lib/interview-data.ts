@@ -67,9 +67,12 @@ export interface NavItem {
 
 export const navItems: NavItem[] = [
   { title: "Dashboard", to: "/dashboard", icon: "LayoutDashboard" },
-  { title: "Mock Interview", to: "/interview", icon: "MessageSquareText" },
+  { title: "AI Interview", to: "/interview", icon: "MessageSquareText" },
+  { title: "Scenario Lab", to: "/scenarios", icon: "FlaskConical" },
   { title: "Practice", to: "/practice", icon: "Dumbbell" },
   { title: "Learn", to: "/learn", icon: "GraduationCap" },
+  { title: "My Roadmap", to: "/roadmap", icon: "Map" },
+  { title: "Live Expert", to: "/expert", icon: "UserRoundCheck" },
   { title: "Progress", to: "/progress", icon: "TrendingUp" },
   { title: "Interview History", to: "/history", icon: "History" },
   { title: "Settings", to: "/settings", icon: "Settings" },
