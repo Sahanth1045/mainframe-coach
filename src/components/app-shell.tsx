@@ -13,8 +13,12 @@ import {
   Menu,
   X,
   Sparkles,
+  FlaskConical,
+  Map,
+  UserRoundCheck,
 } from "lucide-react";
 import { navItems, user } from "@/lib/interview-data";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   LayoutDashboard,
@@ -24,6 +28,9 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   TrendingUp,
   History,
   Settings,
+  FlaskConical,
+  Map,
+  UserRoundCheck,
 };
 
 function Logo() {
@@ -150,6 +157,7 @@ export function AppShell({ children, title }: { children: ReactNode; title?: str
             <h1 className="truncate text-sm font-semibold text-foreground">{title}</h1>
           </div>
           <div className="flex shrink-0 items-center gap-2">
+            <ThemeToggle />
             <button className="hidden size-8 place-items-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:grid">
               <Search className="size-4" />
             </button>
