@@ -35,11 +35,11 @@ export function FloatingDataParticles({
   useFrame((_, dt) => {
     if (!ref.current) return;
     ref.current.rotation.y += dt * 0.03;
-    const p = ref.current.geometry.attributes.position as THREE.BufferAttribute;
+    const p = ref.current.geometry.attributes["position"] as THREE.BufferAttribute;
     const a = p.array as Float32Array;
     for (let i = 1; i < a.length; i += 3) {
-      a[i] += dt * 0.09;
-      if (a[i]! > radius * 0.5) a[i] = -radius * 0.5;
+      const next = (a[i] ?? 0) + dt * 0.09;
+      a[i] = next > radius * 0.5 ? -radius * 0.5 : next;
     }
     p.needsUpdate = true;
   });
