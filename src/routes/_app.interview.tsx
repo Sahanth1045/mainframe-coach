@@ -20,6 +20,7 @@ import {
 import { AppShell } from "@/components/app-shell";
 import { Card, Code, ScoreBar, toneFor } from "@/components/interview-ui";
 import { AnswerComposer, VoiceStatePill, type VoiceState } from "@/components/voice-ui";
+import { CoachStage, VoiceStage } from "@/components/three/stages";
 import { useDictation, useNarration, useSpeechSupport } from "@/hooks/use-voice";
 import { user } from "@/lib/interview-data";
 import {
