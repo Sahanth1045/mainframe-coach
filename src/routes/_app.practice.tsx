@@ -20,7 +20,7 @@ const strengthStyle: Record<string, string> = {
   Developing: "text-warning",
   "Needs work": "text-destructive",
 };
-const strengthIcon: Record<string, React.ElementType> = {
+const strengthIcon: Record<string, typeof AlertCircle> = {
   Strong: CheckCircle2,
   Proficient: CheckCircle2,
   Developing: AlertCircle,
