@@ -10,6 +10,7 @@ import {
   GhostButton,
   Code,
 } from "@/components/interview-ui";
+import { MainframeCoreStage, SkillUniverseStage } from "@/components/three/stages";
 import { user, readiness, topics, weakestTopic, learningPaths, interviewHistory } from "@/lib/interview-data";
 
 export const Route = createFileRoute("/_app/dashboard")({
