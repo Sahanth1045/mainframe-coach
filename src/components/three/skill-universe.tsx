@@ -8,7 +8,7 @@ export interface SkillNodeData {
   mastery: number;
 }
 
-const VIOLET = new THREE.Color("#7c5cff");
+const VIOLET = new THREE.Color("#0f9c9c");
 const CYAN = new THREE.Color("#22d3ee");
 const AMBER = new THREE.Color("#f5a524");
 
@@ -33,13 +33,13 @@ function Core() {
           color="#161f34"
           metalness={0.9}
           roughness={0.25}
-          emissive="#4c1d95"
+          emissive="#0b3f42"
           emissiveIntensity={0.5}
         />
       </mesh>
       <lineSegments>
         <edgesGeometry args={[new THREE.IcosahedronGeometry(0.66, 1)]} />
-        <lineBasicMaterial color="#8b5cf6" transparent opacity={0.7} />
+        <lineBasicMaterial color="#12a594" transparent opacity={0.7} />
       </lineSegments>
     </group>
   );
@@ -199,7 +199,7 @@ export default function SkillUniverse3D({
       style={{ background: "transparent" }}
     >
       <ambientLight intensity={0.65} />
-      <pointLight position={[0, 0, 0]} intensity={12} color="#8b5cf6" distance={9} />
+      <pointLight position={[0, 0, 0]} intensity={12} color="#12a594" distance={9} />
       <pointLight position={[4, 3, 3]} intensity={10} color="#22d3ee" distance={14} />
       <Orbit drag />
       <Core />

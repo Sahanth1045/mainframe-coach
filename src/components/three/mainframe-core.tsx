@@ -2,8 +2,8 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
 
-const VIOLET = "#7c5cff";
-const BLUE = "#3b82f6";
+const VIOLET = "#0f9c9c";
+const BLUE = "#2a9d8f";
 const CYAN = "#22d3ee";
 
 /** Sparse drifting data particles — reused across scenes. */
