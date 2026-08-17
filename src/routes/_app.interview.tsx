@@ -292,7 +292,17 @@ function InterviewPage() {
 
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
               <div className="space-y-6 lg:col-span-2">
-                <VoiceStatePill state={voiceState} level={dictation.level} />
+                <Card glass className="holo-grid relative overflow-hidden p-0">
+                  <CoachStage
+                    state={voiceState}
+                    level={dictation.level}
+                    className="h-40 w-full sm:h-52"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 p-3">
+                    <VoiceStatePill state={voiceState} level={dictation.level} />
+                  </div>
+                </Card>
+
 
                 <Card className="space-y-6 p-5 sm:p-6">
                   {turns.map((turn) =>
