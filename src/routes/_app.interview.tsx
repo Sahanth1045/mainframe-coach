@@ -364,7 +364,14 @@ function InterviewPage() {
                   <div ref={bottomRef} />
                 </Card>
 
+                {dictation.listening && (
+                  <Card glass className="overflow-hidden p-0">
+                    <VoiceStage level={dictation.level} active className="h-28 w-full" />
+                  </Card>
+                )}
+
                 <AnswerComposer
+
                   mode={composerMode}
                   onModeChange={setComposerMode}
                   value={draft}
