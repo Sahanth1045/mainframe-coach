@@ -9,7 +9,7 @@ const STATE_COLOR: Record<CoachState, string> = {
   ready: "#0f9c9c",
   speaking: "#2a9d8f",
   listening: "#22d3ee",
-  analyzing: "#a78bfa",
+  analyzing: "#7fd6c8",
 };
 
 function Orb({ state, level }: { state: CoachState; level: number }) {
