@@ -10,6 +10,7 @@ import {
   GhostButton,
   Code,
 } from "@/components/interview-ui";
+import { MainframeCoreStage, SkillUniverseStage } from "@/components/three/stages";
 import { user, readiness, topics, weakestTopic, learningPaths, interviewHistory } from "@/lib/interview-data";
 
 export const Route = createFileRoute("/_app/dashboard")({
@@ -33,24 +34,36 @@ function DashboardPage() {
   return (
     <AppShell title="Dashboard">
       <div className="mx-auto max-w-6xl space-y-10 px-4 py-8 sm:px-6 lg:px-8">
-        {/* Greeting + CTA */}
-        <section className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-6 sm:flex sm:flex-wrap sm:justify-between">
-          <div className="min-w-0">
-            <p className="text-sm text-muted-foreground">{greeting}, {user.name}</p>
-            <h1 className="mt-1 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-              You're <span className="text-primary">{readiness.overall}%</span> interview ready
-            </h1>
-            <p className="mt-2 max-w-xl text-sm text-muted-foreground">
-              Readiness is up {readiness.trend}% this week. Focus on{" "}
-              <span className="font-medium text-foreground">{weakestTopic.name}</span> to reach the senior benchmark.
-            </p>
-          </div>
-          <div className="flex shrink-0 flex-wrap gap-2">
-            <PrimaryButton to="/interview">
-              <Play className="size-4" /> Start Mock Interview
-            </PrimaryButton>
+        {/* Holographic hero */}
+        <section className="relative overflow-hidden rounded-3xl border border-transparent glass-panel holo-glow">
+          <MainframeCoreStage className="absolute inset-0 h-full w-full opacity-70" />
+          <div className="relative grid grid-cols-[minmax(0,1fr)_auto] items-end gap-6 p-6 sm:flex sm:flex-wrap sm:justify-between sm:p-8">
+            <div className="min-w-0">
+              <p className="text-sm text-muted-foreground">{greeting}, {user.name}</p>
+              <h1 className="mt-1 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+                You're <span className="text-primary">{readiness.overall}%</span> interview ready
+              </h1>
+              <p className="mt-2 max-w-xl text-sm text-muted-foreground">
+                Readiness is up {readiness.trend}% this week. Focus on{" "}
+                <span className="font-medium text-foreground">{weakestTopic.name}</span> to reach the senior benchmark.
+              </p>
+            </div>
+            <div className="flex shrink-0 flex-wrap gap-2">
+              <PrimaryButton to="/interview">
+                <Play className="size-4" /> Start Mock Interview
+              </PrimaryButton>
+            </div>
           </div>
         </section>
+
+        {/* Skill universe */}
+        <section className="space-y-4">
+          <SectionLabel>Skill Universe</SectionLabel>
+          <Card glass className="overflow-hidden p-0">
+            <SkillUniverseStage topics={topics} className="h-[300px] w-full sm:h-[380px]" />
+          </Card>
+        </section>
+
 
         {/* Readiness + weakness alert */}
         <section className="grid grid-cols-1 gap-6 lg:grid-cols-3">

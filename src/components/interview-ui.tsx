@@ -189,15 +189,18 @@ export function EmptyState({
 export function Card({
   children,
   className = "",
+  glass = false,
 }: {
   children: ReactNode;
   className?: string;
+  glass?: boolean;
 }) {
   return (
     <div
-      className={`rounded-2xl border border-border bg-card shadow-sm ${className}`}
+      className={`rounded-2xl border ${glass ? "glass-panel border-transparent" : "border-border bg-card shadow-sm"} ${className}`}
     >
       {children}
     </div>
   );
 }
+

@@ -157,3 +157,48 @@
     border-color: color-mix(in oklab, var(--primary) 25%, var(--color-border));
   }
 }
+
+/* ---- Futuristic 3D layer ---- */
+:root {
+  --holo-cyan: oklch(0.78 0.13 200);
+  --holo-violet: oklch(0.62 0.18 295);
+  --glass-surface: color-mix(in oklab, var(--card) 78%, transparent);
+  --glass-border: color-mix(in oklab, var(--primary) 16%, var(--border));
+  --grid-line: color-mix(in oklab, var(--primary) 10%, transparent);
+}
+
+.dark {
+  --glass-surface: color-mix(in oklab, var(--card) 62%, transparent);
+  --glass-border: color-mix(in oklab, var(--holo-cyan) 18%, var(--border));
+  --grid-line: color-mix(in oklab, var(--holo-cyan) 12%, transparent);
+}
+
+@theme inline {
+  --color-holo-cyan: var(--holo-cyan);
+  --color-holo-violet: var(--holo-violet);
+}
+
+@utility glass-panel {
+  background: var(--glass-surface);
+  border-color: var(--glass-border);
+  backdrop-filter: blur(18px) saturate(140%);
+  box-shadow:
+    0 1px 0 0 color-mix(in oklab, white 25%, transparent) inset,
+    0 18px 40px -28px color-mix(in oklab, var(--primary) 45%, transparent);
+}
+
+@utility holo-grid {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+@utility holo-glow {
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--holo-cyan) 22%, transparent),
+    0 24px 70px -40px color-mix(in oklab, var(--holo-violet) 60%, transparent);
+}
+
+@utility scene-fade {
+  mask-image: radial-gradient(ellipse at center, black 55%, transparent 100%);
+}

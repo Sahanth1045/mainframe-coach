@@ -5,11 +5,11 @@ import * as THREE from "three";
 export type CoachState = "idle" | "speaking" | "listening" | "analyzing" | "ready";
 
 const STATE_COLOR: Record<CoachState, string> = {
-  idle: "#7c5cff",
-  ready: "#7c5cff",
-  speaking: "#3b82f6",
+  idle: "#0f9c9c",
+  ready: "#0f9c9c",
+  speaking: "#2a9d8f",
   listening: "#22d3ee",
-  analyzing: "#a78bfa",
+  analyzing: "#7fd6c8",
 };
 
 function Orb({ state, level }: { state: CoachState; level: number }) {
@@ -97,7 +97,7 @@ export default function HolographicCoach({
       style={{ background: "transparent" }}
     >
       <ambientLight intensity={0.7} />
-      <pointLight position={[2, 2, 3]} intensity={12} color="#8b5cf6" distance={12} />
+      <pointLight position={[2, 2, 3]} intensity={12} color="#12a594" distance={12} />
       <pointLight position={[-2, -1, 2]} intensity={9} color="#22d3ee" distance={12} />
       <Orb state={state} level={level} />
     </Canvas>

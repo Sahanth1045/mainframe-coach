@@ -20,6 +20,7 @@ import {
 import { AppShell } from "@/components/app-shell";
 import { Card, Code, ScoreBar, toneFor } from "@/components/interview-ui";
 import { AnswerComposer, VoiceStatePill, type VoiceState } from "@/components/voice-ui";
+import { CoachStage, VoiceStage } from "@/components/three/stages";
 import { useDictation, useNarration, useSpeechSupport } from "@/hooks/use-voice";
 import { user } from "@/lib/interview-data";
 import {
@@ -292,7 +293,17 @@ function InterviewPage() {
 
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
               <div className="space-y-6 lg:col-span-2">
-                <VoiceStatePill state={voiceState} level={dictation.level} />
+                <Card glass className="holo-grid relative overflow-hidden p-0">
+                  <CoachStage
+                    state={voiceState}
+                    level={dictation.level}
+                    className="h-40 w-full sm:h-52"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 p-3">
+                    <VoiceStatePill state={voiceState} level={dictation.level} />
+                  </div>
+                </Card>
+
 
                 <Card className="space-y-6 p-5 sm:p-6">
                   {turns.map((turn) =>
@@ -353,7 +364,14 @@ function InterviewPage() {
                   <div ref={bottomRef} />
                 </Card>
 
+                {dictation.listening && (
+                  <Card glass className="overflow-hidden p-0">
+                    <VoiceStage level={dictation.level} active className="h-28 w-full" />
+                  </Card>
+                )}
+
                 <AnswerComposer
+
                   mode={composerMode}
                   onModeChange={setComposerMode}
                   value={draft}
